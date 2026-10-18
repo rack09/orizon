@@ -1,30 +1,47 @@
-# Orizon - API REST per paesi e viaggi
+<div align="center">
+
+# 🌍 Orizon
+
+### Paesi, viaggi e nuove destinazioni. Tutto in un'API.
 
 ![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
 ![JSON](https://img.shields.io/badge/REST_API-JSON-16324F?style=for-the-badge)
 
-**Progetto PHP e MySQL di Melvin Rosales - Start2Impact**
+**Progetto PHP e MySQL di Melvin Rosales · Start2Impact**
+
+[![Apri la demo live](https://img.shields.io/badge/DEMO_LIVE-SOLA_LETTURA-14B8A6?style=for-the-badge)](https://melvinrosales.com/orizon-api)
+[![Repository GitHub](https://img.shields.io/badge/CODICE-GITHUB-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/rack09/orizon)
+
+</div>
+
+---
 
 Un backend per Orizon, un'agenzia di viaggi orientata al turismo responsabile. L'API consente di gestire paesi e viaggi e di cercare le offerte in base alle destinazioni e al numero di posti disponibili.
 
-**[Apri la demo live](https://melvinrosales.com/orizon-api)** · **[Repository GitHub](https://github.com/rack09/orizon)**
+> 🌐 **Esplora la demo:** apri la [versione online](https://melvinrosales.com/orizon-api) per consultare i dati e provare i filtri.
+>
+> 💻 **Prova il CRUD completo:** segui l'[installazione locale](#installazione-locale) e copia gli [esempi PowerShell](#prove-da-powershell).
 
-## Indice
+## 🧭 Esplora il progetto
 
-- [Demo live](#demo-live)
-- [Funzionalità](#funzionalità)
-- [Tecnologie e scelte tecniche](#tecnologie-e-scelte-tecniche)
-- [Installazione locale](#installazione-locale)
-- [Endpoint](#endpoint)
-- [Filtri dei viaggi](#filtri-dei-viaggi)
-- [Prove da PowerShell](#prove-da-powershell)
-- [Risposte ed errori](#risposte-ed-errori)
-- [Modello dei dati](#modello-dei-dati)
-- [Struttura del progetto](#struttura-del-progetto)
-- [Convenzioni linguistiche](#convenzioni-linguistiche)
+- [🚀 Demo live](#demo-live)
+- [✨ Funzionalità](#funzionalita)
+- [🛠️ Tecnologie e scelte tecniche](#tecnologie-e-scelte-tecniche)
+- [⚙️ Installazione locale](#installazione-locale)
+- [📡 Endpoint](#endpoint)
+- [🔎 Filtri dei viaggi](#filtri-dei-viaggi)
+- [🧪 Prove da PowerShell](#prove-da-powershell)
+- [🚦 Risposte ed errori](#risposte-ed-errori)
+- [🗃️ Modello dei dati](#modello-dei-dati)
+- [🗂️ Struttura del progetto](#struttura-del-progetto)
+- [🌐 Convenzioni linguistiche](#convenzioni-linguistiche)
 
-## Demo live
+---
+
+<a id="demo-live"></a>
+
+## 🚀 Demo live
 
 La versione online permette di **consultare i dati in modalità di sola lettura** tramite richieste `GET`: elenchi dei paesi e dei viaggi, filtri per paesi, filtri per posti disponibili e combinazioni dei due criteri. Le risposte sono in JSON.
 
@@ -39,19 +56,23 @@ La versione online permette di **consultare i dati in modalità di sola lettura*
 
 Le operazioni complete di creazione, aggiornamento ed eliminazione descritte di seguito si provano eseguendo il progetto in locale.
 
-## Funzionalità
+<a id="funzionalita"></a>
 
-- Creazione, aggiornamento, eliminazione ed elenco dei paesi.
-- Creazione, aggiornamento, eliminazione ed elenco dei viaggi.
-- Associazione di più paesi allo stesso viaggio.
-- Ricerca dei viaggi per paesi e numero esatto di posti disponibili.
-- Validazione dei dati e risposte con codici HTTP appropriati.
-- Ricostruzione del database con `migrations.sql`.
-- Caricamento facoltativo di dati di esempio con `seed.sql`.
+## ✨ Funzionalità
+
+- 🌍 **Paesi:** creazione, aggiornamento, eliminazione ed elenco.
+- 🧳 **Viaggi:** gestione dei viaggi e dei posti disponibili.
+- 🔗 **Destinazioni multiple:** più paesi associati allo stesso viaggio.
+- 🔎 **Ricerca mirata:** filtri per paesi e numero esatto di posti disponibili.
+- ✅ **Dati validati:** controlli sugli input e codici HTTP appropriati.
+- 🗄️ **Database riproducibile:** struttura ricostruibile con `migrations.sql`.
+- 🌱 **Pronto per le prove:** dati di esempio facoltativi in `seed.sql`.
 
 Il progetto è un'API backend: per provarlo si possono usare un browser per le consultazioni, PowerShell oppure un client HTTP.
 
-## Tecnologie e scelte tecniche
+<a id="tecnologie-e-scelte-tecniche"></a>
+
+## 🛠️ Tecnologie e scelte tecniche
 
 | Componente | Impiego e motivazione |
 | --- | --- |
@@ -63,7 +84,9 @@ Il progetto è un'API backend: per provarlo si possono usare un browser per le c
 
 La relazione molti a molti evita di duplicare i dati dei paesi quando una destinazione compare in più viaggi. Il salvataggio di un viaggio e delle sue associazioni avviene in una transazione: se un passaggio fallisce, le modifiche vengono annullate.
 
-## Installazione locale
+<a id="installazione-locale"></a>
+
+## ⚙️ Installazione locale
 
 ### 1. Preparare l'ambiente
 
@@ -118,7 +141,9 @@ Risposta attesa:
 {"message":"API Orizon funzionante"}
 ```
 
-## Endpoint
+<a id="endpoint"></a>
+
+## 📡 Endpoint
 
 URL di base per eseguire tutte le operazioni in locale:
 
@@ -130,15 +155,15 @@ Le richieste `POST` e `PUT` richiedono un oggetto JSON e l'header `Content-Type:
 
 | Metodo | Percorso | Operazione | Risposta di successo |
 | --- | --- | --- | --- |
-| GET | `/` | Verifica del funzionamento dell'API | `200` e messaggio JSON |
-| GET | `/countries` | Elenco dei paesi | `200` e array JSON |
-| POST | `/countries` | Creazione di un paese | `201` e paese creato |
-| PUT | `/countries/{id}` | Aggiornamento di un paese | `200` e paese aggiornato |
-| DELETE | `/countries/{id}` | Eliminazione di un paese | `204`, senza corpo |
-| GET | `/trips` | Elenco dei viaggi, con filtri facoltativi | `200` e array JSON |
-| POST | `/trips` | Creazione di un viaggio | `201` e viaggio creato |
-| PUT | `/trips/{id}` | Aggiornamento di un viaggio | `200` e viaggio aggiornato |
-| DELETE | `/trips/{id}` | Eliminazione di un viaggio | `204`, senza corpo |
+| 🟢 GET | `/` | Verifica del funzionamento dell'API | `200` e messaggio JSON |
+| 🟢 GET | `/countries` | Elenco dei paesi | `200` e array JSON |
+| 🔵 POST | `/countries` | Creazione di un paese | `201` e paese creato |
+| 🟠 PUT | `/countries/{id}` | Aggiornamento di un paese | `200` e paese aggiornato |
+| 🔴 DELETE | `/countries/{id}` | Eliminazione di un paese | `204`, senza corpo |
+| 🟢 GET | `/trips` | Elenco dei viaggi, con filtri facoltativi | `200` e array JSON |
+| 🔵 POST | `/trips` | Creazione di un viaggio | `201` e viaggio creato |
+| 🟠 PUT | `/trips/{id}` | Aggiornamento di un viaggio | `200` e viaggio aggiornato |
+| 🔴 DELETE | `/trips/{id}` | Eliminazione di un viaggio | `204`, senza corpo |
 
 La lettura delle risorse avviene tramite gli endpoint di elenco. I percorsi con `{id}` supportano `PUT` e `DELETE`.
 
@@ -176,7 +201,9 @@ Esempio di risposta per un viaggio:
 }
 ```
 
-## Filtri dei viaggi
+<a id="filtri-dei-viaggi"></a>
+
+## 🔎 Filtri dei viaggi
 
 | Parametro | Esempio | Significato |
 | --- | --- | --- |
@@ -198,7 +225,9 @@ Risultati attesi dopo aver caricato il seed, prima di modificare i dati:
 | `/trips?country_ids=1&available_seats=5` | `1` |
 | `/trips?country_ids=4&available_seats=5` | Nessuno: `[]` |
 
-## Prove da PowerShell
+<a id="prove-da-powershell"></a>
+
+## 🧪 Prove da PowerShell
 
 ### Consultare la demo online
 
@@ -235,7 +264,9 @@ Invoke-WebRequest -Uri "$baseUrl/trips/$($trip.id)" -Method Delete -UseBasicPars
     Select-Object StatusCode, Content
 ```
 
-## Risposte ed errori
+<a id="risposte-ed-errori"></a>
+
+## 🚦 Risposte ed errori
 
 | Codice HTTP | Utilizzo |
 | --- | --- |
@@ -255,7 +286,9 @@ Esempio di errore applicativo:
 {"error":"Paese non trovato"}
 ```
 
-## Modello dei dati
+<a id="modello-dei-dati"></a>
+
+## 🗃️ Modello dei dati
 
 | Tabella | Campi | Vincoli principali |
 | --- | --- | --- |
@@ -265,7 +298,9 @@ Esempio di errore applicativo:
 
 Un paese può comparire in più viaggi e un viaggio può coinvolgere più paesi. La tabella `country_trip` rappresenta questa relazione molti a molti. Le chiavi esterne con `ON DELETE CASCADE` eliminano le associazioni quando viene eliminato un paese o un viaggio.
 
-## Struttura del progetto
+<a id="struttura-del-progetto"></a>
+
+## 🗂️ Struttura del progetto
 
 | File | Responsabilità |
 | --- | --- |
@@ -277,12 +312,18 @@ Un paese può comparire in più viaggi e un viaggio può coinvolgere più paesi.
 | `seed.sql` | Inserimento facoltativo dei dati di esempio |
 | `README.md` | Installazione, endpoint, esempi e collegamenti al progetto |
 
-## Convenzioni linguistiche
+<a id="convenzioni-linguistiche"></a>
+
+## 🌐 Convenzioni linguistiche
 
 Rotte, campi JSON, parametri e identificatori del codice sono in inglese per mantenere una nomenclatura uniforme e comprensibile anche in contesti internazionali. Messaggi descrittivi e documentazione sono in italiano, in linea con il contesto formativo del progetto.
 
 ---
 
-**Melvin Rosales** · Progetto PHP e MySQL · Start2Impact
+<div align="center">
 
-[Demo live](https://melvinrosales.com/orizon-api) · [GitHub](https://github.com/rack09/orizon)
+**✍️ Melvin Rosales** · Progetto PHP e MySQL · Start2Impact
+
+[🚀 Esplora la demo](https://melvinrosales.com/orizon-api) · [💻 Scopri il codice](https://github.com/rack09/orizon)
+
+</div>
